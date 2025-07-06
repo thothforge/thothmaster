@@ -36,6 +36,7 @@ def install_help_message [] {
     print "  aws-cli     - Install AWS CLI"
     print "  node        - Install Node.js"
     print "  terragrunt  - Install Terragrunt (--version/-v to specify version, defaults to latest)"
+    print "  amazon-q    - Install Amazon Q for command line"
     print "  all         - Install all tools"
     print ""
     print "Options:"
@@ -53,6 +54,7 @@ def handle_install [
     #source commands/install/aws_cli.nu
     #source commands/install/node.nu
     source commands/install/terragrunt.nu
+    source commands/install/amazon_q.nu
     source commands/install/all.nu
 
     match $target {
@@ -61,6 +63,7 @@ def handle_install [
         "aws-cli" => { install-aws-cli }
         "node" => { install-node }
         "terragrunt" => { install-terragrunt }
+        "amazon-q" => { install-amazon-q }
         "all" => { install-all }
         _ => {
             print $"Unknown install target: ($target)"
