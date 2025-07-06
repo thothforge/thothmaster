@@ -18,7 +18,26 @@ cd thothmaster
 chmod +x thothmaster.nu
 ```
 
+To make Thothmaster accessible from anywhere in your system (requires Nushell):
+
+```bash
+# Option 1: Create a symbolic link in /usr/local/bin (requires sudo)
+sudo ln -sf /path/to/thothmaster/thothmaster.nu /usr/local/bin/thothmaster
+
+# Option 2: Create a symbolic link in your user's bin directory
+mkdir -p ~/bin
+ln -sf /path/to/thothmaster/thothmaster.nu ~/bin/thothmaster
+```
+
+Make sure your `~/bin` directory is in your PATH if using Option 2.
+
 ## Usage
+
+```bash
+thothmaster <command> [options]
+```
+
+Or if running directly from the installation directory:
 
 ```bash
 ./thothmaster.nu <command> [options]
@@ -33,7 +52,7 @@ chmod +x thothmaster.nu
 ### Install Command
 
 ```bash
-./thothmaster.nu install <target> [options]
+thothmaster install <target> [options]
 ```
 
 #### Available Targets
@@ -43,6 +62,7 @@ chmod +x thothmaster.nu
 - `aws-cli` - Install AWS CLI (not implemented yet)
 - `node` - Install Node.js (not implemented yet)
 - `terragrunt` - Install Terragrunt
+- `amazon-q` - Install Amazon Q for command line
 - `all` - Install all tools
 
 #### Options
@@ -53,22 +73,28 @@ chmod +x thothmaster.nu
 
 Install the latest version of Terragrunt:
 ```bash
-./thothmaster.nu install terragrunt
+thothmaster install terragrunt
 ```
 
 Install a specific version of Terragrunt:
 ```bash
-./thothmaster.nu install terragrunt --version v0.77.22
+thothmaster install terragrunt --version v0.77.22
+```
+
+Install Amazon Q for command line:
+```bash
+thothmaster install amazon-q
 ```
 
 Install all available tools:
 ```bash
-./thothmaster.nu install all
+thothmaster install all
 ```
 
 ## Project Structure
 
 - `thothmaster.nu` - Main entry point
+- `main.nu` - Core functionality
 - `lib/` - Utility functions
   - `utils.nu` - General utilities
   - `ui.nu` - UI-related functions

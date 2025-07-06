@@ -6,28 +6,28 @@ export def install-amazon-q [] {
     
     # Download the latest Amazon Q .deb package
     print "Downloading Amazon Q..."
-    let download_result = (run-external "wget" "https://desktop-release.q.us-east-1.amazonaws.com/latest/amazon-q.deb" "-O" "amazon-q.deb")
+    run-external "wget" "https://desktop-release.q.us-east-1.amazonaws.com/latest/amazon-q.deb" "-O" "amazon-q.deb"
     
-    if $download_result.exit_code != 0 {
-        print $"Error downloading Amazon Q: ($download_result.stderr)"
+    if not ($env.LAST_EXIT_CODE == 0) {
+        print "Error downloading Amazon Q"
         return
     }
     
     # Install dependencies
     print "Installing dependencies..."
-    let deps_result = (run-external --sudo "apt-get" "install" "-f" "-y")
+    sudo apt-get install -f -y
     
-    if $deps_result.exit_code != 0 {
-        print $"Error installing dependencies: ($deps_result.stderr)"
+    if not ($env.LAST_EXIT_CODE == 0) {
+        print "Error installing dependencies"
         return
     }
     
     # Install the .deb package
     print "Installing Amazon Q package..."
-    let install_result = (run-external --sudo "dpkg" "-i" "amazon-q.deb")
+    sudo dpkg -i amazon-q.deb
     
-    if $install_result.exit_code != 0 {
-        print $"Error installing Amazon Q: ($install_result.stderr)"
+    if not ($env.LAST_EXIT_CODE == 0) {
+        print "Error installing Amazon Q"
         return
     }
     
